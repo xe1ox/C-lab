@@ -4,10 +4,7 @@
 #include <ctime>
 
 
-#include <iostream>
-#include <string>
-#include <cstdlib>
-#include <ctime>
+
 
 int sumLastNums(int x) {
     int a;
