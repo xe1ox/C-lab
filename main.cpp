@@ -4,13 +4,9 @@
 #include <ctime>
 
 
-
-
 int sumLastNums(int x) {
-    int a;
-    int b;
-    a = x % 10;
-    b = (x % 100) / 10;
+    int a = x % 10;
+    int b = (x % 100) / 10;
     return a + b;
 }
 
@@ -18,8 +14,7 @@ int sumLastNums(int x) {
 bool isPositive (int x) {
     if (x > 0) {
         return true;
-    }
-    else {
+    } else {
         return false;
     }
 }
@@ -28,8 +23,7 @@ bool isPositive (int x) {
 bool isUpperCase (char x) {
     if (x >= 'A' && x <= 'Z') {
         return true;
-    }
-    else {
+    } else {
         return false;
     }
 }
@@ -38,8 +32,7 @@ bool isUpperCase (char x) {
 bool isDivisor (int a, int b) {
     if (a % b == 0 or b % a == 0) {
         return true;
-    }
-    else {
+    } else {
         return false;
     }
 }
@@ -55,8 +48,7 @@ int lastNumSum(int a, int b) {
 double safeDiv (int x, int y) {
     if (y == 0) {
         return 0;
-    }
-    else {
+    } else {
         return static_cast<double>(x) / y;
     }
 }
@@ -65,11 +57,9 @@ double safeDiv (int x, int y) {
 std::string makeDecision (int x, int y) {
     if (x > y) {
         return std::to_string(x) + ">" + std::to_string(y);
-    }
-    else if (x < y) {
+    } else if (x < y) {
         return std::to_string(x) + "<" + std::to_string(y);
-    }
-    else {
+    } else {
         return std::to_string(x) + "=" + std::to_string(y);
     }
 }
@@ -78,22 +68,18 @@ std::string makeDecision (int x, int y) {
 bool sum3 (int x, int y, int z) {
     if (x == y + z or y == z + x or z == x + y) {
         return true;
-    }
-    else {
+    } else {
         return false;
     }
-
 }
 
 
 std::string age (int x) {
     if (x % 10 == 1 and x != 11) {
         return std::to_string(x) + " year";
-    }
-    else if ((x % 10 == 2 or x % 10 == 3 or x % 10 == 4) and (x != 12 and x != 13 and x != 14)) {
+    } else if ((x % 10 == 2 or x % 10 == 3 or x % 10 == 4) and (x != 12 and x != 13 and x != 14)) {
         return std::to_string(x) + " years";
-    }
-    else {
+    } else {
         return std::to_string(x) + " let";
     }
 }
@@ -119,7 +105,6 @@ void printDays (int x) {
         default:
             std::cout << "It is not a day of the week!\n";
     }
-
 }
 
 
@@ -155,7 +140,6 @@ bool equalNum (int x) {
         x = x / 10;
     }
     return true;
-
 }
 
 
@@ -170,23 +154,33 @@ void leftTriangle (int x) {
 
 
 void guessGame() {
-    int RandomNumber = rand() % 10;
+    int RandomNumber = std::rand() % 10;
     int NumberOfAttempts = 0;
-    int UserNumber;
+    int UserNumber = 0;
+
     while (true) {
         std::cout << "Enter number from 0 to 9: ";
         std::cin >> UserNumber;
-        if (std::cin.fail() or UserNumber < 0) {
+        if (std::cin.fail()) {
             std::cout << "\nInvalid input.\n";
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
             break;
+        } else {
+            if (UserNumber < 0 or UserNumber > 9) {
+                std::cout << "\nInvalid input.\n";
+                break;
+            }
         }
+
         NumberOfAttempts++;
+
         if (UserNumber == RandomNumber) {
             std::cout << "You win!\n";
-            std::cout << "You guessed the number in " << NumberOfAttempts << " attempts.\n";
+            std::cout << "You guessed the number in "
+                      << NumberOfAttempts << " attempts.\n";
             break;
-        }
-        else {
+        } else {
             std::cout << "You lose!\n";
         }
     }
@@ -234,7 +228,6 @@ int* concat(int arr1[], int arr2[]) {
     for (int i = 0; i < 3; i++) {
         newArr[i] = arr1[i];
     }
-
     for (int i = 0; i < 3; i++) {
         newArr[i + 3] = arr2[i];
     }
@@ -244,12 +237,10 @@ int* concat(int arr1[], int arr2[]) {
 
 int* deleteNegative(int arr[]) {
     int* newArr = new int[7];
-
+    int j = 0;
     for (int i = 0; i < 7; i++) {
         newArr[i] = 0;
     }
-
-    int j = 0;
 
     for (int i = 0; i < 7; i++) {
         if (arr[i] >= 0) {
@@ -263,19 +254,21 @@ int* deleteNegative(int arr[]) {
 
 int main() {
     std::cout << "Task 1.2\n";
-    int number;
+    int number = 0;
     std::cout << "Enter number x: ";
     std::cin >> number;
 
     if (std::cin.fail()) {
         std::cout << "Invalid input.\n";
-        return 0;
-    }
-    if (number < 10) {
+    } else if (number < 10) {
         std::cout << "Invalid input.\n";
-        return 0;
+    } else {
+        std::cout << "Sum two last nums: " << sumLastNums(number);
     }
-    std::cout << "Sum two last nums: " << sumLastNums(number);
+    std::cin.clear();
+    std::cin.ignore(10000, '\n');
+
+
 
 
     std::cout << "\nTask 1.4\n";
@@ -283,88 +276,110 @@ int main() {
     std::cin >> number;
     if (std::cin.fail()) {
         std::cout << "Invalid input.\n";
-        return 0;
+    } else {
+        std::cout << isPositive(number);
     }
-    std::cout << isPositive(number);
+    std::cin.clear();
+    std::cin.ignore(10000, '\n');
+
 
 
     std::cout << "\nTask 1.6\n";
-    char symbol;
+    char symbol = '\0';
     std::cout << "\nEnter symbol x: ";
     std::cin >> symbol;
     if ((symbol >= '0' or symbol < '0') && symbol <= '9') {
         std::cout << "Invalid input.\n";
-    }
-    else {
+    } else {
         std::cout << isUpperCase (symbol);
     }
-
+    std::cin.clear();
+    std::cin.ignore(10000, '\n');
 
 
     std::cout << "\nTask 1.8\n";
-    int numbera;
-    int numberb;
+    int numbera = 0;
+    int numberb = 0;
     std::cout << "\nEnter number a: ";
     std::cin >> numbera;
     if (std::cin.fail()) {
         std::cout << "Invalid input.\n";
-        return 0;
-    }
-    std::cout << "\nEnter number b: ";
-    std::cin >> numberb;
-    if (std::cin.fail()) {
-        std::cout << "Invalid input.\n";
-        return 0;
-    }
-    std::cout << isDivisor (numbera, numberb);
+    } else {
+        std::cout << "\nEnter number b: ";
+        std::cin >> numberb;
 
+        if (std::cin.fail()) {
+            std::cout << "Invalid input.\n";
+            } else {
+                std::cout << isDivisor (numbera, numberb);
+            }
+    }
+    std::cin.clear();
+    std::cin.ignore(10000, '\n');
 
 
 
 
     std::cout << "\nTask 1.10\n";
-    int result;
+
+    int result = 0;
+
     std::cout << "Enter number a: ";
     std::cin >> result;
-    if (std::cin.fail()) {
-        std::cout << "\nInvalid input.\n";
-        return 0;
-    }
-    std::cout << "Enter number b: ";
-    std::cin >> number;
-    if (std::cin.fail()) {
-        std::cout << "\nInvalid input.\n";
-        return 0;
-    }
-    result = lastNumSum(result, number);
-    std::cout << "Current sum: " << result << "\n";
 
-    std::cout << "Enter next number: ";
-    std::cin >> number;
     if (std::cin.fail()) {
         std::cout << "\nInvalid input.\n";
-        return 0;
-    }
-    result = lastNumSum(result, number);
-    std::cout << "Current sum: " << result << "\n";
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+    } else {
+        std::cout << "Enter number b: ";
+        std::cin >> number;
 
-    std::cout << "Enter next number: ";
-    std::cin >> number;
-    if (std::cin.fail()) {
-        std::cout << "\nInvalid input.\n";
-        return 0;
-    }
-    result = lastNumSum(result, number);
-    std::cout << "Current sum: " << result << "\n";
+        if (std::cin.fail()) {
+            std::cout << "\nInvalid input.\n";
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+        } else {
+            result = lastNumSum(result, number);
+            std::cout << "Current sum: " << result << "\n";
 
-    std::cout << "Enter next number: ";
-    std::cin >> number;
-    if (std::cin.fail()) {
-        std::cout << "\nInvalid input.\n";
-        return 0;
+            std::cout << "Enter next number: ";
+            std::cin >> number;
+
+            if (std::cin.fail()) {
+                std::cout << "\nInvalid input.\n";
+                std::cin.clear();
+                std::cin.ignore(10000, '\n');
+            } else {
+                result = lastNumSum(result, number);
+                std::cout << "Current sum: " << result << "\n";
+
+                std::cout << "Enter next number: ";
+                std::cin >> number;
+
+                if (std::cin.fail()) {
+                    std::cout << "\nInvalid input.\n";
+                    std::cin.clear();
+                    std::cin.ignore(10000, '\n');
+                } else {
+                    result = lastNumSum(result, number);
+                    std::cout << "Current sum: " << result << "\n";
+
+                    std::cout << "Enter next number: ";
+                    std::cin >> number;
+
+                    if (std::cin.fail()) {
+                        std::cout << "\nInvalid input.\n";
+                        std::cin.clear();
+                        std::cin.ignore(10000, '\n');
+                    } else {
+                        result = lastNumSum(result, number);
+                        std::cout << "Final result: " << result << "\n";
+                    }
+                }
+            }
+        }
     }
-    result = lastNumSum(result, number);
-    std::cout << "Final result: " << result << "\n";
 
 
 
@@ -374,16 +389,21 @@ int main() {
     std::cin >> numbera;
     if (std::cin.fail()) {
         std::cout << "\nInvalid input.\n";
-        return 0;
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+    } else {
+        std::cout << "Enter number y: ";
+        std::cin >> numberb;
+
+        if (std::cin.fail()) {
+            std::cout << "\nInvalid input.\n";
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+        } else {
+            double result1 = safeDiv(numbera, numberb);
+            std::cout << "Result: " << result1;
+        }
     }
-    std::cout << "Enter number y: ";
-    std::cin >> numberb;
-    if (std::cin.fail()) {
-        std::cout << "\nInvalid input.\n";
-        return 0;
-    }
-    double result1 = safeDiv(numbera, numberb);
-    std::cout << "Result: " << result1;
 
 
 
@@ -391,55 +411,73 @@ int main() {
     std::cout << "\nEnter number a: ";
     std::cin >> numbera;
     if (std::cin.fail()) {
-        std::cout << "\nInvalid input.\n";
-        return 0;
+        std::cout << "Invalid input.\n";
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+    } else {
+        std::cout << "\nEnter number b: ";
+        std::cin >> numberb;
+        if (std::cin.fail()) {
+            std::cout << "\nInvalid input.\n";
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+        } else {
+            std::cout << makeDecision(numbera, numberb);
+        }
     }
-    std::cout << "\nEnter number b: ";
-    std::cin >> numberb;
-    if (std::cin.fail()) {
-        std::cout << "\nInvalid input.\n";
-        return 0;
-    }
-    std::cout << makeDecision(numbera, numberb);
 
 
 
-    int number_a;
-    int number_b;
-    int number_c;
+
     std::cout << "\nTask 2.6\n";
+    int number_a = 0;
+    int number_b = 0;
+    int number_c = 0;
     std::cout << "\nEnter number a: ";
     std::cin >> number_a;
     if (std::cin.fail()) {
         std::cout << "\nInvalid input.\n";
-        return 0;
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+    } else {
+        std::cout << "\nEnter number b: ";
+        std::cin >> number_b;
+
+        if (std::cin.fail()) {
+            std::cout << "\nInvalid input.\n";
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+        } else {
+            std::cout << "\nEnter number c: ";
+            std::cin >> number_c;
+
+            if (std::cin.fail()) {
+                std::cout << "\nInvalid input.\n";
+                std::cin.clear();
+                std::cin.ignore(10000, '\n');
+            } else {
+                std::cout << sum3(number_a, number_b, number_c);
+            }
+        }
     }
-    std::cout << "\nEnter number b: ";
-    std::cin >> number_b;
-    if (std::cin.fail()) {
-        std::cout << "\nInvalid input.\n";
-        return 0;
-    }
-    std::cout << "\nEnter number c: ";
-    std::cin >> number_c;
-    if (std::cin.fail()) {
-        std::cout << "\nInvalid input.\n";
-        return 0;
-    }
-    std::cout << sum3(number_a, number_b, number_c);
 
 
 
 
     std::cout << "\nTask 2.8\n";
-    int number_x;
+    int number_x = 0;
     std::cout << "\nEnter number x: ";
     std::cin >> number_x;
     if (std::cin.fail() or number_x < 0) {
         std::cout << "\nInvalid input.\n";
-        return 0;
+
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+        }
+    } else {
+        std::cout << age(number_x);
     }
-    std::cout << age (number_x);
 
 
     std::cout << "\nTask 2.10\n";
@@ -447,40 +485,52 @@ int main() {
     std::cin >> number_x;
     if (std::cin.fail()) {
         std::cout << "\nInvalid input.\n";
-        return 0;
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+    } else {
+        printDays(number_x);
     }
-    printDays(number_x);
+
 
 
 
     std::cout << "\nTask 3.2\n";
     std::cout << "Enter a number: ";
     std::cin >> number_x;
-    if (std::cin.fail() or number_x < 0) {
+    if (std::cin.fail()) {
         std::cout << "\nInvalid input.\n";
-        return 0;
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+    } else {
+        if (number_x < 0) {
+            std::cout << "\nInvalid input.\n";
+        } else {
+            std::cout << reverseListNums(number_x);
+        }
     }
-    std::cout << reverseListNums(number_x);
 
 
 
 
     std::cout << "\nTask 3.4\n";
-    int number_y;
+    int number_y = 0;
     std::cout << "\nEnter a number x: ";
     std::cin >> number_x;
     if (std::cin.fail()) {
         std::cout << "\nInvalid input.\n";
-        return 0;
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+    } else {
+        std::cout << "\nEnter a number y: ";
+        std::cin >> number_y;
+        if (std::cin.fail()) {
+            std::cout << "\nInvalid input.\n";
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+        } else {
+            std::cout << pow(number_x, number_y);
+        }
     }
-    std::cout << "\nEnter a number y: ";
-    std::cin >> number_y;
-    if (std::cin.fail()) {
-        std::cout << "\nInvalid input.\n";
-        return 0;
-    }
-
-    std::cout << pow(number_x, number_y);
 
 
 
@@ -490,10 +540,11 @@ int main() {
     std::cin >> number_x;
     if (std::cin.fail()) {
         std::cout << "\nInvalid input.\n";
-        return 0;
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+    } else {
+        std::cout << equalNum(number_x);
     }
-    std::cout << equalNum(number_x);
-
 
 
 
@@ -501,11 +552,17 @@ int main() {
     std::cout << "\nTask 3.8\n";
     std::cout << "Enter number x: ";
     std::cin >> number_x;
-    if (std::cin.fail() or (number_x <= 0)) {
+    if (std::cin.fail()) {
         std::cout << "\nInvalid input.\n";
-        return 0;
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+    } else {
+        if (number_x <= 0) {
+            std::cout << "\nInvalid input.\n";
+        } else {
+            leftTriangle(number_x);
+        }
     }
-    leftTriangle(number_x);
 
 
     std::cout << "\nTask 3.10\n";
@@ -515,26 +572,33 @@ int main() {
 
     std::cout << "\nTask 4.2\n";
     int arr1[7];
+    bool validInput = true;
     std::cout << "Enter 7 elements of array: ";
     for (int i = 0; i < 7; i++) {
         std::cin >> arr1[i];
 
         if (std::cin.fail()) {
             std::cout << "Error! Enter numbers only.\n";
-            return 0;
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+            validInput = false;
+            break;
         }
     }
-    int x;
-    std::cout << "Enter number to find: ";
-    std::cin >> x;
 
-    if (std::cin.fail()) {
-        std::cout << "Error! Enter a number only.\n";
-        return 0;
+    if (validInput) {
+        int x = 0;
+        std::cout << "Enter number to find: ";
+        std::cin >> x;
+        if (std::cin.fail()) {
+            std::cout << "Error! Enter a number only.\n";
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+        } else {
+            int result2 = findLast(arr1, x);
+            std::cout << "Last index: " << result2 << "\n";
+        }
     }
-
-    int result2 = findLast(arr1, x);
-    std::cout << "Last index: " << result2 << "\n";
 
 
 
@@ -542,136 +606,174 @@ int main() {
 
     std::cout << "\nTask 4.4\n";
     int arr2[5];
-
-    std::cout << "Enter 5 elements of array:";
-
+    bool validInput2 = true;
+    std::cout << "Enter 5 elements of array: ";
     for (int i = 0; i < 5; i++) {
         std::cin >> arr2[i];
+
         if (std::cin.fail()) {
             std::cout << "Error! Enter numbers only.\n";
-            return 0;
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+            validInput2 = false;
+            break;
         }
     }
 
-    int numberr_x;
-    std::cout << "Enter number to insert: ";
-    std::cin >> numberr_x;
-    if (std::cin.fail()) {
-        std::cout << "Error! Enter a number only.\n";
-        return 0;
+    if (validInput2) {
+        int numberr_x = 0;
+        std::cout << "Enter number to insert: ";
+        std::cin >> numberr_x;
+        if (std::cin.fail()) {
+            std::cout << "Error! Enter a number only.\n";
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+        } else {
+            int pos = 0;
+
+            std::cout << "Enter position (1-6): ";
+            std::cin >> pos;
+
+            if (std::cin.fail()) {
+                std::cout << "Error! Enter a number only.\n";
+                std::cin.clear();
+                std::cin.ignore(10000, '\n');
+            } else {
+                if (pos < 1 or pos > 6) {
+                    std::cout << "Error! Position must be from 1 to 6.\n";
+                } else {
+                    pos--;
+
+                    int* result3 = add(arr2, numberr_x, pos);
+
+                    std::cout << "New array: ";
+
+                    for (int i = 0; i < 6; i++) {
+                        std::cout << result3[i] << " ";
+                    }
+
+                    std::cout << "\n";
+                    delete[] result3;
+                }
+            }
+        }
     }
-
-    int pos;
-    std::cout << "Enter position (0-5): ";
-    std::cin >> pos;
-
-    if (std::cin.fail()) {
-        std::cout << "Error! Enter a number only.\n";
-        return 0;
-    }
-
-    if (pos < 1 or pos > 6) {
-        std::cout << "Error! position must be from 0 to 5.\n";
-        return 0;
-    }
-    pos--;
-
-    int* result3 = add(arr2, x, pos);
-    std::cout << "New array: ";
-
-    for (int i = 0; i < 6; i++) {
-        std::cout << result3[i] << " ";
-    }
-    std::cout << "\n";
-    delete[] result3;
 
 
     std::cout << "\nTask 4.6\n";
-    int arr3[5];
+    int arr3[5]{};
+    bool validInput3 = true;
 
     std::cout << "Enter 5 elements of array: ";
 
     for (int i = 0; i < 5; i++) {
         std::cin >> arr3[i];
+
         if (std::cin.fail()) {
             std::cout << "Error! Enter numbers only.\n";
-            return 0;
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+            validInput3 = false;
+            break;
         }
     }
 
-    reverse(arr3);
+    if (validInput3) {
 
-    std::cout << "Reversed array: ";
+        reverse(arr3);
+        std::cout << "Reversed array: ";
 
-    for (int i = 0; i < 5; i++) {
-        std::cout << arr3[i] << " ";
+        for (int i = 0; i < 5; i++) {
+            std::cout << arr3[i] << " ";
+        }
+        std::cout << "\n";
     }
-    std::cout << "\n";
 
 
 
     std::cout << "\nTask 4.8\n";
-    int array1[3];
-    int array2[3];
-
+    int array1[3]{};
+    int array2[3]{};
+    bool validInput4 = true;
     std::cout << "Enter 3 elements of first array: ";
 
     for (int i = 0; i < 3; i++) {
-        std::cin >> arr1[i];
-
-        if (std::cin.fail()) {
-            std::cout << "Error! enter numbers only.\n";
-            return 0;
-        }
-    }
-
-    std::cout << "Enter 3 elements of second array:";
-    for (int i = 0; i < 3; i++) {
-        std::cin >> arr2[i];
-
+        std::cin >> array1[i];
         if (std::cin.fail()) {
             std::cout << "Error! Enter numbers only.\n";
-            return 0;
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+            validInput4 = false;
+            break;
         }
     }
 
-    int* result4 = concat(arr1, arr2);
-
-    std::cout << "Combined array: ";
-
-    for (int i = 0; i < 6; i++) {
-        std::cout << result4[i] << " ";
+    if (validInput4) {
+        std::cout << "Enter 3 elements of second array: ";
+        for (int i = 0; i < 3; i++) {
+            std::cin >> array2[i];
+            if (std::cin.fail()) {
+                std::cout << "Error! Enter numbers only.\n";
+                std::cin.clear();
+                std::cin.ignore(10000, '\n');
+                validInput4 = false;
+                break;
+            }
+        }
     }
 
-    std::cout << "\n";
-    delete[] result4;
+    if (validInput4) {
+        int* result4 = concat(array1, array2);
+
+        std::cout << "Combined array: ";
+
+        for (int i = 0; i < 6; i++) {
+            std::cout << result4[i] << " ";
+        }
+
+        std::cout << "\n";
+        delete[] result4;
+    }
 
 
 
 
     std::cout << "\nTask 4.10\n";
     int arr[7];
+    bool validInput5 = true;
 
     std::cout << "Enter 7 numbers: ";
-
     for (int i = 0; i < 7; i++) {
         std::cin >> arr[i];
         if (std::cin.fail()) {
-            std::cout << "Error! enter numbers only.\n";
-            return 0;
+            std::cout << "Error! Enter numbers only.\n";
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+            validInput5 = false;
+            break;
         }
     }
 
+    if (validInput5) {
+        int count = 0;
+        for (int i = 0; i < 7; i++) {
+            if (arr[i] >= 0) {
+                count++;
+            }
+        }
 
-    int* result5 = deleteNegative(arr);
+        int* result5 = deleteNegative(arr);
 
-    std::cout << "Result: ";
+        std::cout << "Result: ";
 
-    for (int i = 0; i < 7; i++) {
-        std::cout << result5[i] << " ";
+        for (int i = 0; i < count; i++) {
+            std::cout << result5[i] << " ";
+        }
+
+        std::cout << "\n";
+        delete[] result5;
     }
 
-    delete[] result5;
 
     return 0;
 }
